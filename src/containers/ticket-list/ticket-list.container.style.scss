@@ -1,0 +1,15 @@
+main.ticket-container{
+    padding: 78px 79px;
+}
+
+section.ticket-scroll{
+    max-width: 1200px;
+    overflow-y: auto;
+    white-space: nowrap;
+    max-height: 864px;
+    div{
+        height: 5000px;
+        width: 100%;
+        background: green;
+    }
+}

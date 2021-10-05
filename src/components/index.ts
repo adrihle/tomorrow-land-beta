@@ -1,0 +1,1 @@
+export { SVGComponent } from './svg-generator/svg-generator.component';

@@ -1,0 +1,25 @@
+main.navbar-container{
+    padding: 32px 24px;
+    &::before{
+        content: '';
+        background: black;
+        height: 66px;
+        width: 50px;
+        position: absolute;
+        left: -46px;
+        top: 314px;
+        border-radius: 15px;
+    }
+    section.navbar-top{
+        div + div {
+            margin-top: 56px;
+            margin-left: -5px;
+        }
+    }
+    section.navbar-middle{
+        margin-top: 198px;
+        div+div{
+            margin-top: 50px;
+        }
+    }
+}

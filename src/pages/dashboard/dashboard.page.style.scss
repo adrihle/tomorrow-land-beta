@@ -1,0 +1,6 @@
+main.dashboard-container{
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 70px calc(100% - 70px);
+}
