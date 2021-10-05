@@ -8,8 +8,16 @@ section.ticket-scroll{
     white-space: nowrap;
     max-height: 864px;
     div{
-        height: 5000px;
         width: 100%;
         background: green;
+        p{
+            height: 100px;
+            background: limegreen;
+            border: 1px solid gray;
+        }
+        p+p{
+            margin-top: 10px;
+        }
     }
 }
+

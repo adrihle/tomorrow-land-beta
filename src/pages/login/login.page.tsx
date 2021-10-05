@@ -1,24 +1,35 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import { checkEmptyFields } from './login.page.handler';
 import { useDispatch, useSelector } from 'react-redux';
-import { 
-    actionFailureUser,
-    actionRequestUser, 
-    actionSuccessUser,
-    actionResetUser
-} from '../../redux/actions';
-import { environment as env } from 'src/environment/environment';
+import { actionLogin } from '../../redux/actions';
 import { iReduxStore } from '../../redux';
 import { useHistory } from 'react-router-dom';
 import './login.page.style.scss';
-import axios from 'axios';
+import { store as reduxStore } from '../../redux/store.store';
 
 export const LoginPage = () => {
+    // HOOKS
     const [login, setLogin]=useState<iLogin>(initialLogin);
     const [error, setError]=useState<boolean>(false);
     const state = useSelector((state: iReduxStore) => state.user);
     const history = useHistory();
     const dispatch = useDispatch();
+
+    // SI HUBIESE UN VOLUMEN MAYOR DE PETICIONES ASINCRONAS LO
+    // HARIA CON SAGAS, PERO SOLO DOS DECIDI POR TIEMPO CONTROLARLAS
+    // CON RX Y THUNK
+    useEffect(() => {
+        const unsubscribe = reduxStore.subscribe(() => {
+            if (reduxStore.getState().user.auth){
+                setLogin(initialLogin);
+                history.push('/dashboard');
+                console.warn('login')
+            }
+        });
+        return function clean(){
+            unsubscribe();
+        }
+    },[]);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>): void => {
         setLogin(prevState => ({
@@ -26,31 +37,16 @@ export const LoginPage = () => {
             [e.target.name]: e.target.value
         }));
         setError(false);
-        dispatch(actionResetUser());
     };
 
     const onSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         if (!checkEmptyFields(login)){
-            dispatch(actionRequestUser());
-            axios.post(env.logiUrl, login, {
-                headers: {
-                    'Content-type': 'application/json'
-                }
-            })
-                .then((res) => {
-                    dispatch(actionSuccessUser(res.data));
-                    setLogin(initialLogin);
-                    history.push('/dashboard');
-                })
-                .catch((err) => {
-                    console.error(err)
-                    dispatch(actionFailureUser(err));
-                });
+            dispatch(actionLogin(login));
         } else {
             setError(true);
         }
-    }
+    };
 
     return (
         <main className='login-container'>
@@ -78,6 +74,7 @@ export const LoginPage = () => {
                 <button 
                     id='login-btn'
                     type='submit'
+                    disabled={state.loading}
                 >
                     {state.loading ? 'Loading...' : 'Submit Login'}
                 </button>

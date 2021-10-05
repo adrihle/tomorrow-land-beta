@@ -11,10 +11,10 @@ export const NavbarContainer = (): JSX.Element => {
             <section className="navbar-middle">
                 <div><SVGComponent type='DOCUMENT' fill/></div>
                 <div><SVGComponent type='STUDENT' /></div>
+                <div><SVGComponent type='NOTE' /></div>
                 <div><SVGComponent type='DOCUMENT' /></div>
-                <div><SVGComponent type='DOCUMENT' /></div>
-                <div><SVGComponent type='DOCUMENT' /></div>
-                <div><SVGComponent type='DOCUMENT' /></div>
+                <div><SVGComponent type='NOTE' /></div>
+                <div><SVGComponent type='STUDENT' /></div>
             </section>
         </main>
     )

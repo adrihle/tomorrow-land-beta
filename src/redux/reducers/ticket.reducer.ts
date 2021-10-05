@@ -6,7 +6,7 @@ export interface iTicket {
     present: boolean;
     firstName: string;
     lastName: string;
-    birthday: string;
+    birthdate: string;
     email: string;
     phone: string;
     address: string;

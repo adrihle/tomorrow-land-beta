@@ -1,6 +1,7 @@
 main.navbar-container{
     padding: 32px 24px;
     &::before{
+        cursor: pointer;
         content: '';
         background: black;
         height: 66px;
