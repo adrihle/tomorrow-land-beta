@@ -1,4 +1,4 @@
-# Ufounder's excercise (Tomorrow-Land repo)
+# (Tomorrow-Land repo)
 
 Ejercicio práctico basado en login y dashboard mostrando datos asincronos.
 
@@ -41,6 +41,8 @@ Se decidio integrar el store en el index.tsx y no en app.tsx para gestionar el a
 - Diseños:
 Tanto en el componente que renderiza cada ticket como en el modal, se tuvieron que variar las medidas originales del diseño (margin, padding, etc etc) dado que el ID, nombres, emails ... al fetchear el servicio rompia el diseño original, se adapto con un grid y tanteando las columnas para los datos mas largos, con el fin de mantener lo mas fiel posible el diseño original.
 
+- Fetch de datos de api:
+Se decidio realizar este servicio en el backend dado que desde el frontal daba problemas de cors
 ## Available Scripts
 
 In the project directory, you can run:
