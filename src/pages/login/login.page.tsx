@@ -38,6 +38,9 @@ export const LoginPage = () => {
             [e.target.name]: e.target.value
         }));
         setError(false);
+        if (state.error){
+            dispatch(actionResetUser());
+        }
     };
 
     const onSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
