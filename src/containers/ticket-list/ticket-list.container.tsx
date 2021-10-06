@@ -78,7 +78,7 @@ export const TicketListContainer = (): JSX.Element => {
                     )}
                 </section>
             <section className="ticket-scroll-top">
-                <div onClick={() => (scrollRef as any).current.scrollIntoView()} className='__press'>
+                <div onClick={() => (scrollRef as any).current.scrollIntoView({ block: 'end',  behavior: 'smooth' })} className='__press'>
                     <SVGComponent type='UP' fill='white' />
                 </div>
             </section>
