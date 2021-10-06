@@ -1,4 +1,4 @@
-# (Tomorrow-Land repo)
+# Ufounder's excercise (Tomorrow-Land repo)
 
 Ejercicio práctico basado en login y dashboard mostrando datos asincronos.
 
@@ -10,7 +10,9 @@ Testing credentials:
 ## Directivas de desarrollo 
 
 - SE UTILIZA COMO DIRECTIVA PRINCIPAL EN LA ARQUITECTURA DE COMPONENTES --> https://www.componentdriven.org/
+- COMO DIRECTIVA DE GIT SE USÓ GITFLOW.
 - SE DESARROLLO USANDO TYPESCRIPT Y PARA LAS PETICIONES ASINCRONAS SE USO THUNK/RX DADO QUE LA CANTIDAD NO COMPENSA INTEGRAR SAGAS.
+
 
 ## Informacion complementaria
 
