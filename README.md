@@ -1,10 +1,53 @@
-# Getting Started with Create React App
+# Ufounder's excercise (Tomorrow-Land repo)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ejercicio práctico basado en login y dashboard mostrando datos asincronos.
+
+Testing credentials:
+
+- username: ufounders
+- password: react
+
+## Directivas de desarrollo 
+
+- SE UTILIZA COMO DIRECTIVA PRINCIPAL EN LA ARQUITECTURA DE COMPONENTES --> https://www.componentdriven.org/
+- SE DESARROLLO USANDO TYPESCRIPT Y PARA LAS PETICIONES ASINCRONAS SE USO THUNK/RX DADO QUE LA CANTIDAD NO COMPENSA INTEGRAR SAGAS.
+
+## Informacion complementaria
+
+Se crearon diagramas para el flujo de datos entre los componentes y el store de reux y la arquitectura de componentes.
+Podran encontrarse en la carpeta del root "_docs";
+
+### Toma de decisiones
+
+- Renderizado de lista de componentes con datos provenientes de api:
+Se integro la libreria de infinite scroll para gestionar la logica de como mostrar los datos.
+Para ello hubo que crear un algoritmo que fuera haciendo partes del array original, seteandolas en el state de "ticketState", con metodo de slice y controlando y aumentando conforme el scroll el indexInferior e indexSuperior.
+
+- GoToTop component:
+Debido a la causa anterior, que el servicio trae muchos datos (800), se decidio integrar un boton en el dashboard con la funcionalidad de viajar hasta el principio de la lista.
+
+- Renderizado de svg:
+Se creo un componente destinado exclusivamente a manejar estos svg, pasandole parametros para modificar tanto el color como el tamaño, mendiante el prop "type" se puede seleccionar cada uno de los iconos/graficos (tipado).
+
+- Mock para api de login:
+Se creo un server simple (server/server.js) para mockear esta peticion y simular un servicio real, tiene dos posibles respuestas, satus server de 200 con informacion basica de usuario y status 401 (Unauthorized) e informacion del error (tratamiento de este status como error en consola, simulando una peticion real).
+
+- Variables de entorno:
+Se creo una carpeta provisional para las variables de entorno (urls de servicios), cambiando estas se actualizaran las url's de los servicios
+
+- Store de redux:
+Se decidio integrar el store en el index.tsx y no en app.tsx para gestionar el auth de la redireccion al dashboard.
+
+- Diseños:
+Tanto en el componente que renderiza cada ticket como en el modal, se tuvieron que variar las medidas originales del diseño (margin, padding, etc etc) dado que el ID, nombres, emails ... al fetchear el servicio rompia el diseño original, se adapto con un grid y tanteando las columnas para los datos mas largos, con el fin de mantener lo mas fiel posible el diseño original.
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `yarn dev`
+
+Con concurrently se creo un script para arrancar el frontal y el back al mismo tiempo.
 
 ### `yarn start`
 
@@ -28,6 +71,10 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `yarn server`
+
+Runs the server for a mock REST API
 
 ### `yarn eject`
 
