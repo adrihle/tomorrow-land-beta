@@ -1,24 +1,11 @@
 import { iActionTicket } from '../actions';
-
-export interface iTicket {
-    id: string;
-    ticket: number;
-    present: boolean;
-    firstName: string;
-    lastName: string;
-    birthdate: string;
-    email: string;
-    phone: string;
-    address: string;
-}
+import { iTicket } from '../store.interface';
 
 export interface iTicketState {
     tickets: iTicket[];
     loading: boolean;
     error?: boolean; 
 }
-
-
 
 const initialTicketState: iTicketState = {
     loading: false,

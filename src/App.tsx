@@ -2,17 +2,21 @@ import './App.scss';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
+  Redirect
 } from 'react-router-dom';
-import { LoginPage, Dashboard } from './pages';
+import { LoginPage, DashboardPage } from './pages';
+import { useSelector } from 'react-redux';
+import { iReduxStore } from './redux';
 
 function App() {
+  const { auth } = useSelector((state: iReduxStore) => state.user)
   return (
       <Router>
         <main className='app-container'>
           <Switch>
-              <Route path='/dashboard'>
-                <Dashboard />
+              <Route exact path='/dashboard'>
+                {auth ? <DashboardPage /> : <Redirect to='/'/>}
               </Route>
               <Route path='/'>
                 <LoginPage />

@@ -1,11 +1,12 @@
 import { ChangeEvent, FormEvent, useState, useEffect } from 'react';
 import { checkEmptyFields } from './login.page.handler';
 import { useDispatch, useSelector } from 'react-redux';
-import { actionLogin } from '../../redux/actions';
+import { actionLogin, actionResetUser } from '../../redux/actions';
 import { iReduxStore } from '../../redux';
 import { useHistory } from 'react-router-dom';
 import './login.page.style.scss';
 import { store as reduxStore } from '../../redux/store.store';
+import { SVGComponent } from 'src/components';
 
 export const LoginPage = () => {
     // HOOKS
@@ -16,20 +17,20 @@ export const LoginPage = () => {
     const dispatch = useDispatch();
 
     // SI HUBIESE UN VOLUMEN MAYOR DE PETICIONES ASINCRONAS LO
-    // HARIA CON SAGAS, PERO SOLO DOS DECIDI POR TIEMPO CONTROLARLAS
+    // HARIA CON SAGAS, PERO SOLO DOS, DECIDI POR TIEMPO CONTROLARLAS
     // CON RX Y THUNK
     useEffect(() => {
+        dispatch(actionResetUser());
         const unsubscribe = reduxStore.subscribe(() => {
             if (reduxStore.getState().user.auth){
                 setLogin(initialLogin);
                 history.push('/dashboard');
-                console.warn('login')
             }
         });
         return function clean(){
             unsubscribe();
         }
-    },[]);
+    },[history, dispatch]);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>): void => {
         setLogin(prevState => ({
@@ -49,36 +50,42 @@ export const LoginPage = () => {
     };
 
     return (
-        <main className='login-container'>
-            <h1 className='login-title'>Login Page</h1>
-            <form onSubmit={onSubmit} className='login-form'>
-                <input 
-                    autoFocus
-                    type="text" 
-                    placeholder='Username'
-                    id='login-input-username'
-                    name='username'
-                    value={login.username}
-                    onChange={onChange}
-                />
-                <input 
-                    type='password' 
-                    placeholder='Password'
-                    id='login-input-password'
-                    name='password'
-                    value={login.password}
-                    onChange={onChange}
-                />
-                {state.error && <p className='login-error'>Ups, invalid login</p>}
-                {error && <p className='login-error'>Ups, login must be filled!</p>}
-                <button 
-                    id='login-btn'
-                    type='submit'
-                    disabled={state.loading}
-                >
-                    {state.loading ? 'Loading...' : 'Submit Login'}
-                </button>
-            </form>
+        <main className='login-container __pop'>
+            <section>
+                <div className='login-title'>
+                    <SVGComponent type='LOGO' width={100} height={100}/>
+                    <h1>Welcome!</h1>
+                </div>
+                <form onSubmit={onSubmit} className='login-form'>
+                    <input 
+                        autoFocus
+                        type="text" 
+                        placeholder='Username'
+                        id='login-input-username'
+                        name='username'
+                        value={login.username}
+                        onChange={onChange}
+                    />
+                    <input 
+                        type='password' 
+                        placeholder='Password'
+                        id='login-input-password'
+                        name='password'
+                        value={login.password}
+                        onChange={onChange}
+                    />
+                    {state.error && <p className='login-error'>Ups, invalid login</p>}
+                    {error && <p className='login-error'>Ups, login must be filled!</p>}
+                    <button 
+                        id='login-btn'
+                        type='submit'
+                        disabled={state.loading}
+                        className='__press'
+                    >
+                        {state.loading ? 'Loading...' : 'Submit Login'}
+                    </button>
+                </form>
+            </section>
         </main>
     )
 };
