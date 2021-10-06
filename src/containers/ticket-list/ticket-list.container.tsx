@@ -43,6 +43,7 @@ export const TicketListContainer = (): JSX.Element => {
       };
 
     const Loading = (): JSX.Element => <div>Loading...</div>
+    const Error = (): JSX.Element => <div>Error fetching data</div>
 
     return (
         <main className='ticket-container'>
@@ -53,7 +54,7 @@ export const TicketListContainer = (): JSX.Element => {
                 </section>
                 <section className='ticket-scroll'>
                     {!ticketState.length ? (
-                    tickets.loading && <Loading />  
+                    (tickets.loading && !tickets.error) ? <Loading /> : <Error />
                     ):(
                         <InifiniteScroll
                             dataLength={ticketState.length}
