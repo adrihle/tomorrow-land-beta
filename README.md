@@ -1,4 +1,4 @@
-# Ufounder's excercise (Tomorrow-Land repo)
+# Tomorrow-Land repo
 
 Ejercicio práctico basado en login y dashboard mostrando datos asincronos.
 
